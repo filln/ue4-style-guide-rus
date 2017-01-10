@@ -21,6 +21,7 @@ _(От переводчика)_ Многие вещи будут называт�
 
 * [Оригинальная, английская версия](https://github.com/Allar/ue4-style-guide/README.md) by Allar
 * [Корейская версия](https://github.com/ymkim50/ue4-style-guide/blob/master/README_Kor.md) by ymkim50
+* [Японская версия](https://github.com/akenatsu/ue4-style-guide/blob/master/README.jp.md) by akenatsu
 
 ## Основные термины
 
@@ -911,7 +912,7 @@ Copyright (c) 2016 Gamemakin LLC
 
 См. файл [LICENSE](/LICENSE)
 
-**[⬆ Наверх](#toc)**
+**[ Наверх](#toc)**
 
 
 ## Правки
