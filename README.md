@@ -26,6 +26,7 @@ _(От переводчика)_ Многие вещи будут называт�
 * [Оригинальная, английская версия](https://github.com/Allar/ue4-style-guide/README.md) by Allar
 * [Корейская версия](https://github.com/ymkim50/ue4-style-guide/blob/master/README_Kor.md) by ymkim50
 * [Японская версия](https://github.com/akenatsu/ue4-style-guide/blob/master/README.jp.md) by akenatsu
+* [Китайская версия](https://github.com/skylens-inc/ue4-style-guide/blob/master/README.md) by Beijing Skylens Tech
 
 ## Основные термины
 
