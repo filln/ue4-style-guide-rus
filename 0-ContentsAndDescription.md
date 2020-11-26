@@ -1,4 +1,5 @@
 
+<a name="ContentsAndDescription"></a>
 # Руководство по стилю проекта. 
 # Содержание и описание.
 
@@ -87,3 +88,5 @@ _(От переводчика)_ Многие вещи будут называт�
 Copyright (c) 2016 Gamemakin LLC
 
 See [LICENSE](/LICENSE)
+
+**[⬆ Back to Top](#ContentsAndDescription)**
