@@ -5,8 +5,8 @@
 <a name="toc"></a>
 ## Содержание
 
-> 1. [Соглашение о наименованиях](/0-DescriptionAndContent.mds#anc)
-> 1. [Структура папок проекта](/1-AssetNamingConventions.md#structure)
+> 1. [Соглашение о наименованиях](/0-DescriptionAndContent.md)
+> 1. [Структура папок проекта](/1-AssetNamingConventions.md)
 > 1. [Блупринты](#bp)
 > 1. [Static Meshes](#s)
 > 1. [Particle Systems](#ps)
