@@ -135,6 +135,8 @@
 | Декторатор              | Decorator         | BTDecorator_ |            |            |
 | Сервис                  | Service           | BTService_   |            |            |
 | Задание                 | Task              | BTTask_      |            |            |
+| Система запросов среды  | Environment Query | EQS_         |            |            |
+| Контекст системы запросов среды | EnvQueryContext   | EQS_ | Context    |            |
 
 <a name="anc-bp"></a>
 <a name="1.2.4"></a>
@@ -163,6 +165,7 @@
 | Материал Parameter Collection | Material Parameter Collection | MPC_         |         |                           |
 | Профиль подповерхности        | Subsurface Profile            | SSP_         |         |                           |
 | Физический материал           | Physical Materials            | PM_          |         |                           |
+| Частица                       | Decal                         | M_, MI_      | _Decal  |                           |
 
 <a name="anc-textures"></a>
 <a name="1.2.6"></a>
