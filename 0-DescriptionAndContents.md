@@ -4,14 +4,14 @@
 
 <a name="toc"></a>
 ## Содержание
-
-> 1. [Соглашение о наименованиях](/0-DescriptionAndContent.md)
-> 1. [Структура папок проекта](/1-AssetNamingConventions.md)
-> 1. [Блупринты](#bp)
-> 1. [Static Meshes](#s)
-> 1. [Particle Systems](#ps)
-> 1. [Levels / Maps](#levels)
-> 1. [Textures](#textures)
+> 1. [Содержание и описание](/0-DescriptionAndContents.md)
+> 1. [Соглашение о наименованиях](/1-AssetNamingConventions.md)
+> 1. [Структура папок проекта](/2-DirectoryStructure.md)
+> 1. [Блупринты](/3-Blueprints.md)
+> 1. [Static Meshes](4-StaticMeshes.md)
+> 1. [Particle Systems](5-ParticleSystems.md)
+> 1. [Levels / Maps](6-LevelsMaps.md)
+> 1. [Textures](7-Textures.md)
 
 *Наиболее разумный подход к Unreal Engine 4*
 
