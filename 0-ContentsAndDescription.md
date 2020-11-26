@@ -4,7 +4,7 @@
 
 <a name="toc"></a>
 ## Содержание
-> 1. [Содержание и описание](/0-DescriptionAndContents.md)
+> 1. [Содержание и описание](/0-ContentsAndDescription.md)
 > 1. [Соглашение о наименованиях](/1-AssetNamingConventions.md)
 > 1. [Структура папок проекта](/2-DirectoryStructure.md)
 > 1. [Блупринты](/3-Blueprints.md)
