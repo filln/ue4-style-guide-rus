@@ -54,8 +54,8 @@
 | Content | Все ассеты, включая рабочие, личные, внешние неструктурированные, временные, тестируемые |
 | Developers | Ваши личные ассеты, включая рабочие карты. Внесен в .gitignore |
 | Zone17 | Рабочие, структурированные под данное руководство ассеты |
-| AI |  |
-| Animations |  |
+| AI | AI Controller, Behavior Tree, Blackboard, Decorator, Service, Task, Environment Query, EnvQueryContext |
+| Animations | Aim Offset, Aim Offset 1D, Animation Blueprint, Animation Composite, Animation Montage, Animation Sequence, Blend Space, Blend Space 1D, Level Sequence, Morph Target, Paper Flipbook, Rig, Skeletal Mesh, Skeleton |
 | Blueprints |  |
 | Data |  |
 | Maps |  |
