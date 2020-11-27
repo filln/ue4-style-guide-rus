@@ -1,15 +1,17 @@
 
 <a name="2"></a>
 <a name="structure"></a>
-## 2. Структура папок проекта 
-Структура папок также должна восприниматься как закон. Она так же важна для проекта, как и соглашение о наименованиях. Они тесно связаны, и нарушение правил любого из них приводит к ненужному хаосу в проекте.
+## 2. Структура каталогов проекта 
+Структура каталогов также должна восприниматься как закон. Она так же важна для проекта, как и соглашение о наименованиях. Они тесно связаны, и нарушение правил любого из них приводит к ненужному хаосу в проекте.
 
 <a name="2e1"><a>
-### 2e1 Организации папок проекта
+### 2e1 Организации каталогов проекта
 <pre>
 |-- Content
     |-- Zone17
         |-- AI
+        |   |-- NPC1
+        |   |-- NPC2
         |-- Animations
         |   |-- Character
         |   |-- NPC
@@ -28,6 +30,7 @@
         |   |-- Inventory
         |   |-- Weapons
         |   |-- Character
+        |-- Landscape
         |-- Maps
         |   |-- Layers
         |-- Materials
@@ -38,9 +41,12 @@
         |   |-- NPC
         |   |-- Weapons
         |-- Particles
+        |-- Physics
         |-- Sounds
         |   |-- Sky
+        |   |   |-- SoundClasses
         |   |-- Weapons
+        |   |   |-- SoundClasses
         |-- Textures
         |   |-- Inventory
         |   |-- Weapons
@@ -55,18 +61,21 @@
 | Developers | Ваши личные ассеты, включая рабочие карты. Внесен в .gitignore |
 | Zone17 | Рабочие, структурированные под данное руководство ассеты |
 | AI | AI Controller, Behavior Tree, Blackboard, Decorator, Service, Task, Environment Query, EnvQueryContext |
-| Animations | Aim Offset, Aim Offset 1D, Animation Blueprint, Animation Composite, Animation Montage, Animation Sequence, Blend Space, Blend Space 1D, Level Sequence, Morph Target, Paper Flipbook, Rig, Skeletal Mesh, Skeleton |
-| Blueprints |  |
-| Data |  |
-| Maps |  |
-| Materials |  |
-| Meshes |  |
-| Particles |  |
-| Sounds |  |
-| Textures |  |
-| UI |  |
+| Animations | Aim Offset, Aim Offset 1D, Animation Blueprint, Animation Composite, Animation Montage, Animation Sequence, Blend Space, Blend Space 1D, Level Sequence, Morph Target, Rig |
+| Blueprints | Blueprint, Blueprint Function Library, Blueprint Interface |
+| Data | Enumeration, Structure, Curve, Data Asset, Data Table, String Table, Matinee Data |
+| Landscape | Foliage Type, Landscape Grass Type, Landscape Layer |
+| Maps | Level |
+| Materials | Material, Material (Post Process), Material Function, Material Instance, Material Parameter Collection, Subsurface Profile, Material (for Particle System) |
+| Meshes | Skeletal Mesh, Skeleton, Destructible Mesh |
+| Particles | Particle System |
+| Physics | Physical Material, Physical Asset |
+| Sounds | Dialogue, Media Sound, Reverb Effect, Sound |
+| SoundClasses | Sound Class |
+| Textures | Texture, Media Texture, Render Target |
+| UI | Widget Blueprint, Font, Slate Brush, Slate Widget Style,  |
 
-
+Как видите, в принципе разделения по каталогам первым идет тип данных, затем тип ассета. Внутри каталога ассета не создавайте дополнительных каталогов для типов данных. Используйте фильтр контент-браузера и фильтр строки поиска. Можно создавать подкаталоги внутри каталога ассета, чтобы разделить выполняемые функции.
 
 Предпосылки формирования именно такой структуры проекта описаны ниже.
 
