@@ -8,6 +8,8 @@
 ### 2e1 Организации каталогов проекта
 <pre>
 |-- Content
+    |-- SomeUnstructuredAsset1
+    |-- SomeUnstructuredAsset2
     |-- Zone17
         |-- AI
         |   |-- NPC1
@@ -59,6 +61,7 @@
 |---|---|
 | Content | Все ассеты, включая рабочие, личные, внешние неструктурированные, временные, тестируемые |
 | Developers | Ваши личные ассеты, включая рабочие карты. Внесен в .gitignore |
+| SomeUnstructuredAsset1 | Абстрактный неструктурированный ассет. Тот, который только пришел в проект и нуждается в проверке, доработке, структуризации. |
 | Zone17 | Рабочие, структурированные под данное руководство ассеты |
 | AI | AI Controller, Behavior Tree, Blackboard, Decorator, Service, Task, Environment Query, EnvQueryContext |
 | Animations | Aim Offset, Aim Offset 1D, Animation Blueprint, Animation Composite, Animation Montage, Animation Sequence, Blend Space, Blend Space 1D, Level Sequence, Morph Target, Rig |
