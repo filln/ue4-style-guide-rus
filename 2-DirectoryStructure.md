@@ -8,6 +8,7 @@
 ### 2e1 Организации каталогов проекта
 <pre>
 |-- Content
+    |-- Developers
     |-- SomeUnstructuredAsset1
     |-- SomeUnstructuredAsset2
     |-- Zone17
