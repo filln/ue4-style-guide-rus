@@ -411,7 +411,7 @@ All functions and events perform some form of action, whether its getting info, 
 
 <a name="3.3.2"></a>
 <a name="bp-funcs-return"></a>
-#### 3.3.2 Все функции должны иметь ноду Return.
+#### 3.3.2 Все выходы функции должны иметь ноду Return.
 
 Ноды Return явно указывают, что функция завершила выполнение. В мире, где блюпринты могут быть сделаны с `Sequence`, `ForLoopWithBreak` и перенаправлений в обратную сторону, явный поток выполнения важен для читаемости, поддержки и простой отладки.
 
@@ -423,9 +423,9 @@ All functions and events perform some form of action, whether its getting info, 
 <a name="bp-graphs-funcs-node-limit"></a>
 #### 3.3.3 Не должно быть функций с более чем 50 нодами.
 
-Any function this big should be broken down into smaller functions for readability and ease of maintenance.
+Любая функция такого размера должна быть разбита на более мелкие функции для удобства чтения и поддержки.
 
-The following nodes are not counted as they are deemed to not increase function complexity:
+Следующие ноды не учитываются, так как считается, что они не увеличивают сложность функций:
 
 * Comment
 * Route
@@ -437,31 +437,47 @@ The following nodes are not counted as they are deemed to not increase function 
 
 <a name="3.3.4"></a>
 <a name="bp-graphs-funcs-description"></a>
-#### 3.3.4 All Public Functions Should Have A Description 
+#### 3.3.4 Все функции должны иметь осмысленное описание в поле `Description` 
 
-This rule applies more to public facing or marketplace blueprints, so that others can more easily navigate and consume your blueprint API.
-
-Simply, any function that has an access specificer of Public should have its description filled out. 
+Если описание очень большое, то допускается разместить его в комментариях внутри функции, а в поле `Description` дать краткое описание.
 
 <a name="3.3.5"></a>
 <a name="bp-graphs-funcs-plugin-category"></a>
-#### 3.3.5 All Custom Static Plugin `BlueprintCallable` Functions Must Be Categorized By Plugin Name 
+#### 3.3.5 Все статические плагиновые `BlueprintCallable` функции должны быть в категории `Plugin Name`
 
-If your project includes a plugin that defines `static` `BlueprintCallable` functions, they should have their category set to the plugin's name or a subset category of the plugin's name.
+Если ваш проект включает плагин, в котором есть статические `BlueprintCallable` функции, то они должны иметь соответствующую своему плагину категорию.
 
-For example, `Zed Camera Interface` or `Zed Camera Interface | Image Capturing`.
+Для примера, `Zed Camera Interface` или `Zed Camera Interface | Image Capturing`.
+
+<a name="3.3.6"></a>
+#### 3.3.6 Функция или ивент должны быть разработаны и вызваны наиболее эффективно. Нет смысла рассчитывать одно и то же значение несколько раз.
+
+* Если функция вызывается в другой функции (или ивенте) несколько раз, чтобы получить какое-то значение, то записывайте это значение в локальную переменную. Используйте эту локальную переменную, а не дополнительный вызов функции.
+* Не вызывайте функции в цикле, если они выдают одно и то же значение. Вызывайте такие функции до цикла и записывайте возвращаемое значение в локальную переменную.
+* Если функции содержат другие функции, которые возвращают какое-то значение, то проектируйте их так, чтобы не было лишних вызовов.
+
+<a name="3.3.7"></a>
+#### 3.3.7 Не делайте функции, которые возвращают более одного значения. 
+Да, блюпринты позволяют это. Но такие функции не переносимы на С++. Кроме того, это запутывает логику. Есть два хороших варианта:
+* Разделите логику на две функции, каждая из которых будет возвращать по одному значению.
+* Создайте структуру с имененем `SFunctionNameOutput` и сделайте ее возвращаемым значением вашей функции.
+
+<a name="3.3.8"></a>
+#### 3.3.8 Не делайте функции, которые возвращают более одного значения. 
 
 <a name="3.4"></a>
 <a name="bp-graphs"></a>
-### 3.4 Blueprint Graphs 
-
-This section covers things that apply to all Blueprint graphs.
+### 3.4 Графы блюпринтов (Blueprint Graphs). 
 
 <a name="3.4.1"></a>
 <a name="bp-graphs-spaghetti"></a>
-#### 3.4.1 No Spaghetti 
+#### 3.4.1 Никаких спагетти.
 
-Wires should have clear beginnings and ends. You should never have to mentally untangle wires to make sense of a graph. Many of the following sections are dedicated to reducing spaghetti.
+* Соединения должны иметь четкие начала и концы. Вы не должны мысленно распутывать проводки, чтобы выяснить смысл графа. 
+* Соединения не должны пересекаться между собой, если это возможно.
+* Соединения должны идти прямо либо однонаправленно, если это возможно.
+* Соединения не должны быть слишком большие, держите их в пределах вашего монитора. Чтобы избежать слишком длинных соединений, используйте локальные переменные в функциях. * * * * Используйте скопированные геттеры (нода `Get Value`). Если выбирать между связью и геттером, то всегда используйте геттер. 
+* Соединений должно быть минимальное количество. Чтобы уменьшить количество соединений, скопируйте или вытяните дополнительный геттер вместо дополнительного соединения.
 
 <a name="3.4.2"></a>
 <a name="bp-graphs-align-wires"></a>
