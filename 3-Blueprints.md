@@ -171,7 +171,7 @@
 
 <a name="3.2.1.8"></a>
 <a name="bp-vars-naming-arrays"></a>
-##### 3.2.1.8 Массивы ![#](https://img.shields.io/badge/lint-partial_support-yellow.svg)
+##### 3.2.1.8 Массивы 
 
 Массивы подчиняются правилам выше, но описываются во множественном числе.
 
@@ -277,3 +277,231 @@
 #### 3.2.8 Флаг `Config Variable` 
 
 Не используйте флаг `Config Variable`. Дизайнерам будет труднее из-за этого контроллировать поведение блупринта. Этот флаг используется только в C++ для редко меняющихся значений, как если бы они были под двойным флагом `Advanced Display`.
+
+### 3.3 Functions, Events, and Event Dispatchers 
+
+This section describes how you should author functions, events, and event dispatchers. Everything that applies to functions also applies to events, unless otherwise noted.
+
+<a name="3.3.1"></a>
+<a name="bp-funcs-naming"></a>
+#### 3.3.1 Function Naming 
+
+The naming of functions, events, and event dispatchers is critically important. Based on the name alone, certain assumptions can be made about functions. For example:
+
+* Is it a pure function?
+* Is it fetching state information?
+* Is it a handler?
+* Is it an RPC?
+* What is its purpose?
+
+These questions and more can all be answered when functions are named appropriately.
+
+<a name="3.3.1.1"></a>
+<a name="bp-funcs-naming-verbs"></a>
+#### 3.3.1.1 All Functions Should Be Verbs 
+
+All functions and events perform some form of action, whether its getting info, calculating data, or causing something to explode. Therefore, all functions should all start with verbs. They should be worded in the present tense whenever possible. They should also have some context as to what they are doing.
+
+`OnRep` functions, event handlers, and event dispatchers are an exception to this rule.
+
+Good examples:
+
+* `Fire` - Good example if in a Character / Weapon class, as it has context. Bad if in a Barrel / Grass / any ambiguous class.
+* `Jump` - Good example if in a Character class, otherwise, needs context.
+* `Explode`
+* `ReceiveMessage`
+* `SortPlayerArray`
+* `GetArmOffset`
+* `GetCoordinates`
+* `UpdateTransforms`
+* `EnableBigHeadMode`
+* `IsEnemy` - ["Is" is a verb.](http://writingexplained.org/is-is-a-verb)
+
+Bad examples:
+
+* `Dead` - Is Dead? Will deaden?
+* `Rock`
+* `ProcessData` - Ambiguous, these words mean nothing.
+* `PlayerState` - Nouns are ambiguous.
+* `Color` - Verb with no context, or ambiguous noun.
+
+<a name="3.3.1.2"></a>
+<a name="bp-funcs-naming-onrep"></a>
+#### 3.3.1.2 Property RepNotify Functions Always `OnRep_Variable`
+
+All functions for replicated with notification variables should have the form `OnRep_Variable`. This is forced by the Blueprint editor. If you are writing a C++ `OnRep` function however, it should also follow this convention when exposing it to Blueprints.
+
+<a name="3.3.1.3"></a>
+<a name="bp-funcs-naming-bool"></a>
+#### 3.3.1.3 Info Functions Returning Bool Should Ask Questions 
+
+When writing a function that does not change the state of or modify any object and is purely for getting information, state, or computing a yes/no value, it should ask a question. This should also follow [the verb rule](#bp-funcs-naming-verbs).
+
+This is extremely important as if a question is not asked, it may be assumed that the function performs an action and is returning whether that action succeeded.
+
+Good examples:
+
+* `IsDead`
+* `IsOnFire`
+* `IsAlive`
+* `IsSpeaking`
+* `IsHavingAnExistentialCrisis`
+* `IsVisible`
+* `HasWeapon` - ["Has" is a verb.](http://grammar.yourdictionary.com/parts-of-speech/verbs/Helping-Verbs.html)
+* `WasCharging` - ["Was" is past-tense of "be".](http://grammar.yourdictionary.com/parts-of-speech/verbs/Helping-Verbs.html) Use "was" when referring to 'previous frame' or 'previous state'.
+* `CanReload` - ["Can" is a verb.](http://grammar.yourdictionary.com/parts-of-speech/verbs/Helping-Verbs.html)
+
+Bad examples:
+
+* `Fire` - Is on fire? Will fire? Do fire?
+* `OnFire` - Can be confused with event dispatcher for firing.
+* `Dead` - Is dead? Will deaden?
+* `Visibility` - Is visible? Set visibility? A description of flying conditions?
+
+<a name="3.3.1.4"></a>
+<a name="bp-funcs-naming-eventhandlers"></a>
+#### 3.3.1.4 Event Handlers and Dispatchers Should Start With `On` 
+
+Any function that handles an event or dispatches an event should start with `On` and continue to follow [the verb rule](#bp-funcs-naming-verbs). The verb may move to the end however if past-tense reads better.
+
+[Collocations](http://dictionary.cambridge.org/us/grammar/british-grammar/about-words-clauses-and-sentences/collocation) of the word `On` are exempt from following the verb rule.
+
+`Handle` is not allowed. It is 'Unreal' to use `On` instead of `Handle`, while other frameworks may prefer to use `Handle` instead of `On`.
+
+Good examples:
+
+* `OnDeath` - Common collocation in games
+* `OnPickup`
+* `OnReceiveMessage`
+* `OnMessageRecieved`
+* `OnTargetChanged`
+* `OnClick`
+* `OnLeave`
+
+Bad examples:
+
+* `OnData`
+* `OnTarget`
+* `HandleMessage`
+* `HandleDeath`
+
+<a name="3.3.1.5"></a>
+<a name="bp-funcs-naming-rpcs"></a>
+#### 3.3.1.5 Remote Procedure Calls Should Be Prefixed With Target 
+
+Any time an RPC is created, it should be prefixed with either `Server`, `Client`, or `Multicast`. No exceptions.
+
+After the prefix, follow all other rules regarding function naming.
+
+Good examples:
+
+* `ServerFireWeapon`
+* `ClientNotifyDeath`
+* `MulticastSpawnTracerEffect`
+
+Bad examples:
+
+* `FireWeapon` - Does not indicate its an RPC of some kind.
+* `ServerClientBroadcast` - Confusing.
+* `AllNotifyDeath` - Use `Multicast`, never `All`.
+* `ClientWeapon` - No verb, ambiguous.
+
+
+<a name="3.3.2"></a>
+<a name="bp-funcs-return"></a>
+#### 3.3.2 All Functions Must Have Return Nodes 
+
+All functions must have return nodes, no exceptions.
+
+Return nodes explicitly note that a function has finished its execution. In a world where blueprints can be filled with `Sequence`, `ForLoopWithBreak`, and backwards reroute nodes, explicit execution flow is important for readability, maintenance, and easier debugging.
+
+The Blueprint compiler is able to follow the flow of execution and will warn you if there is a branch of your code with an unhandled return or bad flow if you use return nodes.
+
+In situations like where a programmer may add a pin to a Sequence node or add logic after a for loop completes but the loop iteration might return early, this can often result in an accidental error in code flow. The warnings the Blueprint compiler will alert everyone of these issues immediately.
+
+<a name="3.3.3"></a>
+<a name="bp-graphs-funcs-node-limit"></a>
+#### 3.3.3 No Function Should Have More Than 50 Nodes 
+
+Simply, no function should have more than 50 nodes. Any function this big should be broken down into smaller functions for readability and ease of maintenance.
+
+The following nodes are not counted as they are deemed to not increase function complexity:
+
+* Comment
+* Route
+* Cast
+* Getting a Variable
+* Breaking a Struct
+* Function Entry
+* Self
+
+<a name="3.3.4"></a>
+<a name="bp-graphs-funcs-description"></a>
+#### 3.3.4 All Public Functions Should Have A Description 
+
+This rule applies more to public facing or marketplace blueprints, so that others can more easily navigate and consume your blueprint API.
+
+Simply, any function that has an access specificer of Public should have its description filled out. 
+
+<a name="3.3.5"></a>
+<a name="bp-graphs-funcs-plugin-category"></a>
+#### 3.3.5 All Custom Static Plugin `BlueprintCallable` Functions Must Be Categorized By Plugin Name 
+
+If your project includes a plugin that defines `static` `BlueprintCallable` functions, they should have their category set to the plugin's name or a subset category of the plugin's name.
+
+For example, `Zed Camera Interface` or `Zed Camera Interface | Image Capturing`.
+
+<a name="3.4"></a>
+<a name="bp-graphs"></a>
+### 3.4 Blueprint Graphs 
+
+This section covers things that apply to all Blueprint graphs.
+
+<a name="3.4.1"></a>
+<a name="bp-graphs-spaghetti"></a>
+#### 3.4.1 No Spaghetti 
+
+Wires should have clear beginnings and ends. You should never have to mentally untangle wires to make sense of a graph. Many of the following sections are dedicated to reducing spaghetti.
+
+<a name="3.4.2"></a>
+<a name="bp-graphs-align-wires"></a>
+#### 3.4.2 Align Wires Not Nodes 
+
+Always align wires, not nodes. You can't always control the size and pin location on a node, but you can always control the location of a node and thus control the wires. Straight wires provide clear linear flow. Wiggly wires wear wits wickedly. You can straighten wires by using the Straighten Connections command with BP nodes selected. Hotkey: Q
+
+Good example: The tops of the nodes are staggered to keep a perfectly straight white exec line.
+![Aligned By Wires](https://github.com/allar/ue4-style-guide/raw/master/images/bp-graphs-align-wires-good.png "Aligned By Wires")
+
+Bad Example: The tops of the nodes are aligned creating a wiggly white exec line.
+![Bad](https://github.com/allar/ue4-style-guide/raw/master/images/bp-graphs-align-wires-bad.png "Wiggly")
+
+Acceptable Example: Certain nodes might not cooperate no matter how you use the alignment tools. In this situation, try to minimize the wiggle by bringing the node in closer.
+![Acceptable](https://github.com/allar/ue4-style-guide/raw/master/images/bp-graphs-align-wires-acceptable.png "Acceptable")
+
+<a name="3.4.3"></a>
+<a name="bp-graphs-exec-first-class"></a>
+#### 3.4.3 White Exec Lines Are Top Priority 
+
+If you ever have to decide between straightening a linear white exec line or straightening data lines of some kind, always straighten the white exec line.
+
+<a name="3.4.4"></a>
+<a name="bp-graphs-block-comments"></a>
+#### 3.4.4 Graphs Should Be Reasonably Commented 
+
+Blocks of nodes should be wrapped in comments that describe their higher-level behavior. While every function should be well named so that each individual node is easily readable and understandable, groups of nodes contributing to a purpose should have their purpose described in a comment block. If a function does not have many blocks of nodes and its clear that the nodes are serving a direct purpose in the function's goal, then they do not need to be commented as the function name and  description should suffice.
+
+<a name="3.4.5"></a>
+<a name="bp-graphs-cast-error-handling"></a>
+#### 3.4.5 Graphs Should Handle Casting Errors Where Appropriate 
+
+If a function or event assumes that a cast always succeeds, it should appropriately report a failure in logic if the cast fails. This lets others know why something that is 'supposed to work' doesn't. A function should also attempt a graceful recover after a failed cast if it's known that the reference being casted could ever fail to be casted.
+
+This does not mean every cast node should have its failure handled. In many cases, especially events regarding things like collisions, it is expected that execution flow terminates on a failed cast quietly.
+
+<a name="3.4.6"></a>
+<a name="bp-graphs-dangling-nodes"></a>
+#### 3.4.6 Graphs Should Not Have Any Dangling / Loose / Dead Nodes 
+
+All nodes in all blueprint graphs must have a purpose. You should not leave dangling blueprint nodes around that have no purpose or are not executed.
+
+**[⬆ Back to Top](#table-of-contents)**
