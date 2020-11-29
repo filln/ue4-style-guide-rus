@@ -9,6 +9,10 @@
 
 > 3.2 [Переменные](#bp-vars)
 
+> 3.3 [Функции](#bp-functions)
+
+> 3.4 [Графы](#bp-graphs)
+
 <a name="3.1"></a>
 <a name="bp-compiling"></a>
 ### 3.1 Компиляция 
@@ -278,36 +282,36 @@
 
 Не используйте флаг `Config Variable`. Дизайнерам будет труднее из-за этого контроллировать поведение блупринта. Этот флаг используется только в C++ для редко меняющихся значений, как если бы они были под двойным флагом `Advanced Display`.
 
-### 3.3 Functions, Events, and Event Dispatchers 
+### 3.3 Функции, ивенты и ивент диспатчеры.
 
-This section describes how you should author functions, events, and event dispatchers. Everything that applies to functions also applies to events, unless otherwise noted.
+В этом разделе описывается, как должны функционировать функции, ивенты и ивент диспатчеры. Все, что относится к функциям, относится и к ивентам, если не указано иное.
 
 <a name="3.3.1"></a>
 <a name="bp-funcs-naming"></a>
-#### 3.3.1 Function Naming 
+#### 3.3.1 Наименование функций 
 
-The naming of functions, events, and event dispatchers is critically important. Based on the name alone, certain assumptions can be made about functions. For example:
+Наименование функций, ивентов и ивент диспатчеров очень важно. Исходя только из названия, можно сделать вывод о работе функции. Для примера:
+* Это pure функция?
+* Это получение информации о каком-либо состоянии?
+* Это обработчик события (handler)?
+* Это RPC (Remote Procedure Calls)?
+* Каково ее назначение?
 
-* Is it a pure function?
-* Is it fetching state information?
-* Is it a handler?
-* Is it an RPC?
-* What is its purpose?
-
-These questions and more can all be answered when functions are named appropriately.
+На эти и другие вопросы могут быть даны ответы, когда функция названа надлежащим образом.
 
 <a name="3.3.1.1"></a>
 <a name="bp-funcs-naming-verbs"></a>
-#### 3.3.1.1 All Functions Should Be Verbs 
+#### 3.3.1.1 Названия всех функций должны быть глаголами. 
 
 All functions and events perform some form of action, whether its getting info, calculating data, or causing something to explode. Therefore, all functions should all start with verbs. They should be worded in the present tense whenever possible. They should also have some context as to what they are doing.
+Все функции и ивенты выполняют те или иные действия, будь то получение информации, вычисление данных или выполнение взрыва. Поэтому все функции должны начинаться с глаголов.
+Они должны быть сформулированны в настоящем времени, если это возможно. Они также должны отражать определенный контекст того, что они делают.
+`OnRep` функции, обработчики событий (ивентов) и ивент диспатчеры являются исключением из этого правила.
 
-`OnRep` functions, event handlers, and event dispatchers are an exception to this rule.
+Хорошие примеры:
 
-Good examples:
-
-* `Fire` - Good example if in a Character / Weapon class, as it has context. Bad if in a Barrel / Grass / any ambiguous class.
-* `Jump` - Good example if in a Character class, otherwise, needs context.
+* `Fire` - Хороший пример, если в Character / Weapon классе, который имеет этот контекст. Плохо если в Barrel / Grass / другом не имеющим этого контекста классе.
+* `Jump` -  Хороший пример, если это Character, который имеет этот контекст.
 * `Explode`
 * `ReceiveMessage`
 * `SortPlayerArray`
@@ -315,31 +319,31 @@ Good examples:
 * `GetCoordinates`
 * `UpdateTransforms`
 * `EnableBigHeadMode`
-* `IsEnemy` - ["Is" is a verb.](http://writingexplained.org/is-is-a-verb)
+* `IsEnemy` - ["Is" это глагол.](http://writingexplained.org/is-is-a-verb)
 
-Bad examples:
+Плохие примеры:
 
 * `Dead` - Is Dead? Will deaden?
-* `Rock`
-* `ProcessData` - Ambiguous, these words mean nothing.
-* `PlayerState` - Nouns are ambiguous.
-* `Color` - Verb with no context, or ambiguous noun.
+* `Rock` - - Существительное неоднозначно.
+* `ProcessData` -  Двусмысленно, эти слова ничего не значат.
+* `PlayerState` - Существительные неоднозначны.
+* `Color` - Глагол без контекста или неоднозначное существительное.
 
 <a name="3.3.1.2"></a>
 <a name="bp-funcs-naming-onrep"></a>
-#### 3.3.1.2 Property RepNotify Functions Always `OnRep_Variable`
+#### 3.3.1.2 Свойство RepNotify функций всегда должно иметь обозначение `OnRep_Variable`
 
-All functions for replicated with notification variables should have the form `OnRep_Variable`. This is forced by the Blueprint editor. If you are writing a C++ `OnRep` function however, it should also follow this convention when exposing it to Blueprints.
+Все функции для репликации с переменными уведомлений должны иметь обозначение `OnRep_Variable`. Это принудительно устанавливается редактором блюпринтов. Однако, если вы пишите функцию на С++, которая используется в блюпринтах, то должны указывать это явно.
 
 <a name="3.3.1.3"></a>
 <a name="bp-funcs-naming-bool"></a>
-#### 3.3.1.3 Info Functions Returning Bool Should Ask Questions 
+#### 3.3.1.3 Название функции, возвращающей bool, должно выражать вопрос.
 
-When writing a function that does not change the state of or modify any object and is purely for getting information, state, or computing a yes/no value, it should ask a question. This should also follow [the verb rule](#bp-funcs-naming-verbs).
+Когда пишется функция, которая не меняет состояние или не изменяет объект и которая предназначена только для получения информации, состояния, или для вычисления да/нет состояния, то она должна содержать вопрос в названии. Это так же следует правилу [Названия всех функций должны быть глаголами](#bp-funcs-naming-verbs).
 
-This is extremely important as if a question is not asked, it may be assumed that the function performs an action and is returning whether that action succeeded.
+Это чрезвычайно важно, так как если вопрос не задан, то можно предположить, что функция выполняет действие и возвращает ответ: было ли это действие успешным.
 
-Good examples:
+Хорошие примеры:
 
 * `IsDead`
 * `IsOnFire`
@@ -347,30 +351,26 @@ Good examples:
 * `IsSpeaking`
 * `IsHavingAnExistentialCrisis`
 * `IsVisible`
-* `HasWeapon` - ["Has" is a verb.](http://grammar.yourdictionary.com/parts-of-speech/verbs/Helping-Verbs.html)
-* `WasCharging` - ["Was" is past-tense of "be".](http://grammar.yourdictionary.com/parts-of-speech/verbs/Helping-Verbs.html) Use "was" when referring to 'previous frame' or 'previous state'.
-* `CanReload` - ["Can" is a verb.](http://grammar.yourdictionary.com/parts-of-speech/verbs/Helping-Verbs.html)
+* `HasWeapon` - ["Has" это глагол.](http://grammar.yourdictionary.com/parts-of-speech/verbs/Helping-Verbs.html)
+* `WasCharging` - ["Was" это форма прошедшего времени глагола "be".](http://grammar.yourdictionary.com/parts-of-speech/verbs/Helping-Verbs.html) Используйте "was" когда ссылаетесь на предыдущее состояние.
+* `CanReload` - ["Can" это глагол.](http://grammar.yourdictionary.com/parts-of-speech/verbs/Helping-Verbs.html)
 
-Bad examples:
+Плохие примеры:
 
-* `Fire` - Is on fire? Will fire? Do fire?
-* `OnFire` - Can be confused with event dispatcher for firing.
-* `Dead` - Is dead? Will deaden?
-* `Visibility` - Is visible? Set visibility? A description of flying conditions?
+* `Fire` - Горит, стреляет? Будет гореть, стрелять? Поджигает?
+* `OnFire` - Можно перепутать с ивент диспатчером для стрельбы.
+* `Dead` - Умирает? Умрет?
+* `Visibility` - Видимый? Устанавливает видимость? Описание условий видимости?
 
 <a name="3.3.1.4"></a>
 <a name="bp-funcs-naming-eventhandlers"></a>
-#### 3.3.1.4 Event Handlers and Dispatchers Should Start With `On` 
+#### 3.3.1.4 Обработчики событий и диспатчеры должны начинаться с `On`.
+Любые обработчики событий или диспатчеры должны начинаться с `On` и продолжать следовать [правилу глагола](#bp-funcs-naming-verbs). Глагол может быть перемещен в конец названия, если так лучше в обозначении прошедшего времени.
+`Handle` запрещен в названиях.
 
-Any function that handles an event or dispatches an event should start with `On` and continue to follow [the verb rule](#bp-funcs-naming-verbs). The verb may move to the end however if past-tense reads better.
+Хорошие примеры:
 
-[Collocations](http://dictionary.cambridge.org/us/grammar/british-grammar/about-words-clauses-and-sentences/collocation) of the word `On` are exempt from following the verb rule.
-
-`Handle` is not allowed. It is 'Unreal' to use `On` instead of `Handle`, while other frameworks may prefer to use `Handle` instead of `On`.
-
-Good examples:
-
-* `OnDeath` - Common collocation in games
+* `OnDeath` - Общепринятое словосочетание в разработке игр.
 * `OnPickup`
 * `OnReceiveMessage`
 * `OnMessageRecieved`
@@ -378,7 +378,7 @@ Good examples:
 * `OnClick`
 * `OnLeave`
 
-Bad examples:
+Плохие примеры:
 
 * `OnData`
 * `OnTarget`
@@ -387,43 +387,41 @@ Bad examples:
 
 <a name="3.3.1.5"></a>
 <a name="bp-funcs-naming-rpcs"></a>
-#### 3.3.1.5 Remote Procedure Calls Should Be Prefixed With Target 
+#### 3.3.1.5 RPC должны быть с префиксом цели вызова.
 
-Any time an RPC is created, it should be prefixed with either `Server`, `Client`, or `Multicast`. No exceptions.
+Префикс может быть одним из: `Server`, `Client`, or `Multicast`, без исключений.
 
-After the prefix, follow all other rules regarding function naming.
+После префикса название должно следовать остальным правилам наименований.
 
-Good examples:
+Хорошие примеры:
 
 * `ServerFireWeapon`
 * `ClientNotifyDeath`
 * `MulticastSpawnTracerEffect`
 
-Bad examples:
+Плохие примеры:
 
-* `FireWeapon` - Does not indicate its an RPC of some kind.
-* `ServerClientBroadcast` - Confusing.
-* `AllNotifyDeath` - Use `Multicast`, never `All`.
-* `ClientWeapon` - No verb, ambiguous.
+* `FireWeapon` - Не обозначается как функция рода RPC.
+* `ServerClientBroadcast` - Сбивает с толку.
+* `AllNotifyDeath` - Используйте `Multicast`, никогда `All`.
+* `ClientWeapon` - Нет глаголов, двусмысленно.
 
 
 <a name="3.3.2"></a>
 <a name="bp-funcs-return"></a>
-#### 3.3.2 All Functions Must Have Return Nodes 
+#### 3.3.2 Все функции должны иметь ноду Return.
 
-All functions must have return nodes, no exceptions.
+Ноды Return явно указывают, что функция завершила выполнение. В мире, где блюпринты могут быть сделаны с `Sequence`, `ForLoopWithBreak` и перенаправлений в обратную сторону, явный поток выполнения важен для читаемости, поддержки и простой отладки.
 
-Return nodes explicitly note that a function has finished its execution. In a world where blueprints can be filled with `Sequence`, `ForLoopWithBreak`, and backwards reroute nodes, explicit execution flow is important for readability, maintenance, and easier debugging.
+Компилятор блюпринтов способен следить за потоком выполнения и предупредит, есть ли ветка кода с необработанным возвратом функции или плохим потоком, если вы используете ноды Return
 
-The Blueprint compiler is able to follow the flow of execution and will warn you if there is a branch of your code with an unhandled return or bad flow if you use return nodes.
-
-In situations like where a programmer may add a pin to a Sequence node or add logic after a for loop completes but the loop iteration might return early, this can often result in an accidental error in code flow. The warnings the Blueprint compiler will alert everyone of these issues immediately.
+В ситуации, когда программист может добавить пин в Sequence или добавить логику после окончания цикла, но итерация цикла может завершиться раньше чем нужно, это часто может привести к случайной ошибке в потоке блюпринтов. Варнинги компилятора блюпринтов немедленно предупредят вас об этом.
 
 <a name="3.3.3"></a>
 <a name="bp-graphs-funcs-node-limit"></a>
-#### 3.3.3 No Function Should Have More Than 50 Nodes 
+#### 3.3.3 Не должно быть функций с более чем 50 нодами.
 
-Simply, no function should have more than 50 nodes. Any function this big should be broken down into smaller functions for readability and ease of maintenance.
+Any function this big should be broken down into smaller functions for readability and ease of maintenance.
 
 The following nodes are not counted as they are deemed to not increase function complexity:
 
