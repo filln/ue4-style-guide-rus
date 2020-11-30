@@ -2,9 +2,7 @@
 <a name="4"></a>
 <a name="Static Meshes"></a>
 <a name="s"></a>
-## 4. Static Meshes 
-
-This section will focus on Static Mesh assets and their internals.
+## 4. Статичные меши (Static Meshes) 
 
 ### Sections
 
@@ -14,27 +12,21 @@ This section will focus on Static Mesh assets and their internals.
 
 > 4.3 [Modular Socketless Snapping](#s-modular-snapping)
 
-> 4.4 [Must Have Collision](#s-collision)
+> 4.4 [Должна быть коллизия](#s-collision)
 
-> 4.5 [Correct Scale](#s-scaled)
+> 4.5 [Корректное масштабирование (Scale)](#s-scaled)
 
 <a name="4.1"></a>
 <a name="s-uvs"></a>
 ### 4.1 Static Mesh UVs
 
-If Linter is reporting bad UVs and you can't seem to track it down, open the resulting `.log` file in your project's `Saved/Logs` folder for exact details as to why it's failing. I am hoping to include these messages in the Lint report in the future.
-
 <a name="4.1.1"></a>
 <a name="s-uvs-no-missing"></a>
-#### 4.1.1 All Meshes Must Have UVs
-
-Pretty simple. All meshes, regardless how they are to be used, should not be missing UVs.
+#### 4.1.1 Все меши должны иметь UVs
 
 <a name="4.1.2"></a>
 <a name="s-uvs-no-overlapping"></a>
-#### 4.1.2 All Meshes Must Not Have Overlapping UVs for Lightmaps 
-
-Pretty simple. All meshes, regardless how they are to be used, should have valid non-overlapping UVs.
+#### 4.1.2 Все меши должны иметь непересекающиеся UVs для карт освещения (Lightmaps) 
 
 <a name="4.2"></a>
 <a name="s-lods"></a>
