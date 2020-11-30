@@ -1,7 +1,7 @@
 
 ## 3. Блупринты 
 
-Этот раздел направлен на блупринты и их внутреннее обустройство. Где возможно, эти правила подчиняются [стандарту кодинга Epic](https://docs.unrealengine.com/latest/INT/Programming/Development/CodingStandard).
+Этот раздел описывает блупринты и их внутреннее обустройство. Там, где возможно, эти правила подчиняются [стандарту кодинга Epic](https://docs.unrealengine.com/latest/INT/Programming/Development/CodingStandard).
 
 ### Подразделы
 
@@ -305,7 +305,6 @@
 <a name="bp-funcs-naming-verbs"></a>
 #### 3.3.1.1 Названия всех функций должны быть глаголами. 
 
-All functions and events perform some form of action, whether its getting info, calculating data, or causing something to explode. Therefore, all functions should all start with verbs. They should be worded in the present tense whenever possible. They should also have some context as to what they are doing.
 Все функции и ивенты выполняют те или иные действия, будь то получение информации, вычисление данных или выполнение взрыва. Поэтому все функции должны начинаться с глаголов.
 Они должны быть сформулированны в настоящем времени, если это возможно. Они также должны отражать определенный контекст того, что они делают.
 `OnRep` функции, обработчики событий (ивентов) и ивент диспатчеры являются исключением из этого правила.
@@ -463,7 +462,19 @@ All functions and events perform some form of action, whether its getting info, 
 * Создайте структуру с имененем `SFunctionNameOutput` и сделайте ее возвращаемым значением вашей функции.
 
 <a name="3.3.8"></a>
-#### 3.3.8 Не делайте функции, которые возвращают более одного значения. 
+#### 3.3.8 Если выбирать между ивентом и функцией, то выбирайте функцию, если это возможно.
+Ивенты располагаются в одном графе и граф выглядит как одна большая функция. Если в графе много ивентов, то становится трудно найти нужную логику, даже если блоки прокомментированы. Не злоупотребляйте ивентами.
+
+<a name="3.3.8"></a>
+#### 3.3.8 Не используйте следующие конструкции, если их можно заменить функциями:
+* Все макросы. Они избыточны. Некоторые их них трудно переносить на С++. Включая такие макросы как Gate, Multigate, DoN, DoOnce и пр. Кроме, конечно, циклов for, while. 
+* Субграфы (Subgraphs). Они избыточны.
+* Delay. Она не переносима на С++ и вызывает проблемы при нативизации. Используйте SetTimerByFunctionName или SetTimerByEvent.
+* Select. Чтобы перенести логику на этой ноде на С++, иногда нужно во многом изменить ее.  
+
+<a name="3.3.9"></a>
+#### 3.3.9 Если вы знаете С++, то делайте блюпринты так, чтобы логика без изменения и легко переносилась на С++.
+Это сэкономит время, когда потребуется перенести блюпринты на С++.
 
 <a name="3.4"></a>
 <a name="bp-graphs"></a>
@@ -476,48 +487,38 @@ All functions and events perform some form of action, whether its getting info, 
 * Соединения должны иметь четкие начала и концы. Вы не должны мысленно распутывать проводки, чтобы выяснить смысл графа. 
 * Соединения не должны пересекаться между собой, если это возможно.
 * Соединения должны идти прямо либо однонаправленно, если это возможно.
-* Соединения не должны быть слишком большие, держите их в пределах вашего монитора. Чтобы избежать слишком длинных соединений, используйте локальные переменные в функциях. * * * * Используйте скопированные геттеры (нода `Get Value`). Если выбирать между связью и геттером, то всегда используйте геттер. 
-* Соединений должно быть минимальное количество. Чтобы уменьшить количество соединений, скопируйте или вытяните дополнительный геттер вместо дополнительного соединения.
+* Соединения не должны быть слишком длинные, держите их в пределах вашего монитора. Чтобы избежать слишком длинных соединений, используйте локальные переменные в функциях. 
+* Соединений должно быть минимальное количество. Чтобы уменьшить количество соединений, скопируйте или вытяните дополнительный геттер (нода `Get Value`) вместо дополнительного соединения.
 
 <a name="3.4.2"></a>
 <a name="bp-graphs-align-wires"></a>
-#### 3.4.2 Align Wires Not Nodes 
+#### 3.4.2 Выравнивайте связи, а не ноды. 
 
-Always align wires, not nodes. You can't always control the size and pin location on a node, but you can always control the location of a node and thus control the wires. Straight wires provide clear linear flow. Wiggly wires wear wits wickedly. You can straighten wires by using the Straighten Connections command with BP nodes selected. Hotkey: Q
-
-Good example: The tops of the nodes are staggered to keep a perfectly straight white exec line.
-![Aligned By Wires](https://github.com/allar/ue4-style-guide/raw/master/images/bp-graphs-align-wires-good.png "Aligned By Wires")
-
-Bad Example: The tops of the nodes are aligned creating a wiggly white exec line.
-![Bad](https://github.com/allar/ue4-style-guide/raw/master/images/bp-graphs-align-wires-bad.png "Wiggly")
-
-Acceptable Example: Certain nodes might not cooperate no matter how you use the alignment tools. In this situation, try to minimize the wiggle by bringing the node in closer.
-![Acceptable](https://github.com/allar/ue4-style-guide/raw/master/images/bp-graphs-align-wires-acceptable.png "Acceptable")
+Всегда выравнивайте связи, а не ноды. Вы не всегда можете контролировать размер ноды и положение пина в ней, но вы всегда можете контролировать положение ноды и таким образом управлять связями. Прямые связи выглядят как чистый линейный поток. Вы можете выравнивать связи автоматически командой Straighten Connections над выделенными нодами. Горячая клавиша: Q.
 
 <a name="3.4.3"></a>
 <a name="bp-graphs-exec-first-class"></a>
-#### 3.4.3 White Exec Lines Are Top Priority 
+#### 3.4.3 Белые связи в приоритете выравнивания.
 
-If you ever have to decide between straightening a linear white exec line or straightening data lines of some kind, always straighten the white exec line.
+Если выбирать между выравниванием белых (Exec) и цветных (Data) связей, то выравнивайте белые связи.
 
 <a name="3.4.4"></a>
 <a name="bp-graphs-block-comments"></a>
-#### 3.4.4 Graphs Should Be Reasonably Commented 
+#### 3.4.4 Осмысленно комментируйте графы.
 
-Blocks of nodes should be wrapped in comments that describe their higher-level behavior. While every function should be well named so that each individual node is easily readable and understandable, groups of nodes contributing to a purpose should have their purpose described in a comment block. If a function does not have many blocks of nodes and its clear that the nodes are serving a direct purpose in the function's goal, then they do not need to be commented as the function name and  description should suffice.
+Блоки нод следует обволакивать в комментарии, которые отражают их поведение. Как и каждая функция должна быть хорошо названа, чтобы каждый отдельный логический блок был легко читаемым и понятным, так и группы блоков, составляющих логику, должны быть осмысленно прокомментированы.
+Если функция содержит не много блоков нод и ясно, что блоки служат прямой цели функции, то не нужно их комментировать, так как имени и описания функции должно хватить.
 
 <a name="3.4.5"></a>
 <a name="bp-graphs-cast-error-handling"></a>
-#### 3.4.5 Graphs Should Handle Casting Errors Where Appropriate 
+#### 3.4.5 Графы должны обрабатывать ошибки приведения типов (Cast, касты), где это уместно. 
 
-If a function or event assumes that a cast always succeeds, it should appropriately report a failure in logic if the cast fails. This lets others know why something that is 'supposed to work' doesn't. A function should also attempt a graceful recover after a failed cast if it's known that the reference being casted could ever fail to be casted.
-
-This does not mean every cast node should have its failure handled. In many cases, especially events regarding things like collisions, it is expected that execution flow terminates on a failed cast quietly.
+Если работа функции или ивента предполагает, что приведение должно выполниться успешно, то она должна сообщать об ошибке в логике, если приведение не удастся. Это дает знать, почему не работает то, что должно работать. Функция также должна обрабатывать ошибки приведения, то есть предпринять какие-то меры по восстановлению работы, если это важно.
+Это не значит, что нужно обрабатывать каждую ошибку каста. Во многих случаях (например, при обработке коллизий) ожидается, что поток выполнения завершится при неудачном касте.
 
 <a name="3.4.6"></a>
 <a name="bp-graphs-dangling-nodes"></a>
-#### 3.4.6 Graphs Should Not Have Any Dangling / Loose / Dead Nodes 
-
-All nodes in all blueprint graphs must have a purpose. You should not leave dangling blueprint nodes around that have no purpose or are not executed.
+#### 3.4.6 На графах не должно быть ненужных (оборванных) связей, узлов, нод.
+Все ноды и связи должны присутствовать в графе, только если они используются и включены в работу. Вы не должны оставлять на графе связи, которые не идут к нодам, или ноды, если они не выполняются.
 
 **[⬆ Back to Top](#table-of-contents)**
