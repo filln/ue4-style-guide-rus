@@ -4,7 +4,7 @@
 <a name="s"></a>
 ## 4. Статичные меши (Static Meshes) 
 
-### Sections
+### Разделы
 
 > 4.1 [UVs](#s-uvs)
 
