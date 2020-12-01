@@ -4,7 +4,7 @@
 <a name="levels"></a>
 ## 6. Levels / Maps
 
-[Смотрите терминологию](0-ContentsAndDescription.md/#terms-level-map) regarding "levels" vs "maps".
+[Смотрите терминологию](0-ContentsAndDescription.md/#terms-level-map) относительно "levels" vs "maps".
 
 This section will focus on Level assets and their internals.
 
