@@ -3,7 +3,7 @@
 <a name="ps"></a>
 ## 5. Particle Systems
 
-### Sections
+### Разделы
 
 > 5.1 [Наименование эмиттеров](#ps-naming)
 
