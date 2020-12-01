@@ -6,64 +6,54 @@
 
 [Смотрите терминологию](0-ContentsAndDescription.md/#terms-level-map) относительно "levels" vs "maps".
 
-This section will focus on Level assets and their internals.
-
 ### Sections
 
-> 6.1 [No Errors Or Warnings](#levels-no-errors-or-warnings)
+> 6.1 [Никаких ошибок или предупреждений](#levels-no-errors-or-warnings)
 
-> 6.2 [Lighting Should Be Built](#levels-lighting-should-be-built)
+> 6.2 [Свет должен быть запечен](#levels-lighting-should-be-built)
 
-> 6.3 [No Player Visible Z Fighting](#evels-no-visible-z-fighting)
+> 6.3 [Никаких видимых Z-конфликтов (Z Fighting)](#evels-no-visible-z-fighting)
 
-> 6.4 [Marketplace Specific Rules](#evels-levels-mp-rules)
+> 6.4 [Специфические правила для маркетплейса](#evels-levels-mp-rules)
 
 <a name="6.1"></a>
 <a name="levels-no-errors-or-warnings"></a>
-### 6.1 No Errors Or Warnings 
+### 6.1 Никаких ошибок или предупреждений 
 
-All levels should load with zero errors or warnings. If a level loads with any errors or warnings, they should be fixed immediately to prevent cascading issues.
-
-You can run a map check on an open level in the editor by using the console command "map check".
-
-Please note: Linter is even more strict on this than the editor is currently, and will catch load errors that the editor will resolve on its own.
+Все уровни должны загружаться без ошибок и предупреждений. Если уровень загружается с любыми ошибками или предупреждениями, то они должны быть немедленно исправлены, чтобы предупредить накопление таких ошибок.
+Вы можете запустить проверку открытого уровня в редакторе, используя консольную команду "map check".
 
 <a name="6.2"></a>
 <a name="levels-lighting-should-be-built"></a>
-### 6.2 Lighting Should Be Built 
+### 6.2 Свет должен быть запечен 
 
-It is normal during development for levels to occasionally not have lighting built. When doing a test/internal/shipping build or any build that is to be distributed however, lighting should always be built.
+Это нормально, когда во время разработки уровня иногда освещение еще не запечено. Но когда делается тестовый/внутренний/внешний или другой билд, освещение должно быть всегда запечено.
 
 <a name="6.3"></a>
 <a name="levels-no-visible-z-fighting"></a>
-### 6.3 No Player Visible Z Fighting 
+### 6.3 Никаких видимых Z-конфликтов (Z Fighting)
 
-Levels should not have any [z-fighting](https://en.wikipedia.org/wiki/Z-fighting) in all areas visible to the player. 
+В уровне не должно быть видимых для игрока Z-конфликтов. [z-fighting](https://en.wikipedia.org/wiki/Z-fighting) [Z-конфликт](https://ru.wikipedia.org/wiki/Z-буферизация)
 
 <a name="6.4"></a>
 <a name="levels-mp-rules"></a>
-### 6.4 Marketplace Specific Rules
+### 6.4 Специфические правила для маркетплейса
 
-If a project is to be sold on the UE4 Marketplace, it must follow these rules.
+Если проект будет выкладываться на маркетплейсе, то он должен следовать этим правилам.
 
 <a name="6.4.1"></a>
 <a name="levels-mp-rules-overview"></a>
 ### 6.4.1 Overview Level
 
-If your project contains assets that should be visualized or demoed, you must have a map within your project that contains the name "Overview".
-
-This overview map, if it is visualizing assets, should be set up according to [Epic's guidelines](http://help.epicgames.com/customer/en/portal/articles/2592186-marketplace-submission-guidelines-preparing-your-assets#Required%20Levels%20and%20Maps).
-
-For example, `InteractionComponent_Overview`.
+Если ваш проект содержит ассеты, которые будут иметь визуализацию, то ваш проект должен иметь карту с названием "Overview".
+Эта обзорная карта должна следовать правилам  [Epic's guidelines](http://help.epicgames.com/customer/en/portal/articles/2592186-marketplace-submission-guidelines-preparing-your-assets#Required%20Levels%20and%20Maps).
 
 <a name="6.4.2"></a>
 <a name="levels-mp-rules-demo"></a>
 ### 6.4.2 Demo Level
 
-If your project contains assets that should be demoed or come with some sort of tutorial, you must have a map within your project that contains the name "Demo". This level should also contain documentation within it in some form that illustrates how to use your project. See Epic's Content Examples project for good examples on how to do this.
-
-If your project is a gameplay mechanic or other form of system as opposed to an art pack, this can be the same as your "Overview" map.
-
+Если ваш проект содержит ассеты, у которых есть демо-версия или есть какой-то туториал, то в проекте должна быть карта с названием "Demo". Этот уровень кроме прочего содержит документацию с некоторыми формами, которые иллюстрируют, как использовать ваш проект. Смотрите Epic's Content Examples project для примера. 
+Если ваш проект является геймплейной механикой или другой системой, не принадлежащей к художественнным ассетам, то он тоже может иметь карту "Overview".
 For example, `InteractionComponent_Overview_Demo`, `ExplosionKit_Demo`.
 
 **[⬆ Back to Top](#levels)**
