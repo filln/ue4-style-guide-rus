@@ -1,7 +1,7 @@
 <a name="5"></a>
 <a name="Particle Systems"></a>
 <a name="ps"></a>
-## 5. Particle Systems
+## 5. Система частиц (Particle Systems)
 
 ### Разделы
 
@@ -9,7 +9,7 @@
 
 <a name="5.1"></a>
 <a name="ps-emitter-naming"></a>
-### 5.1 Emitter Naming 
+### 5.1 Наименование эмиттеров
 
 Все эмиттеры осмысленно именоваться, не дефолтным названем "Particle Emitter".
 
