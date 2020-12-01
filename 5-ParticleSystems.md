@@ -11,7 +11,6 @@
 <a name="ps-emitter-naming"></a>
 ### 5.1 Emitter Naming 
 
-All emitters in a Particle System should be named something descriptive and not left to their default name "Particle Emitter".
 Все эмиттеры осмысленно именоваться, не дефолтным названем "Particle Emitter".
 
 **[⬆ Back to Top](#ps)**
