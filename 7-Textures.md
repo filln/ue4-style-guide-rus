@@ -1,39 +1,35 @@
 
 <a name="7"></a>
 <a name="textures"></a>
-## 7. Textures
-
-This section will focus on Texture assets and their internals.
+## 7. Текстуры
 
 ### Sections
 
-> 7.1 [Dimensions Are Powers of 2](#textures-dimension)
+> 7.1 [Размер должен быть степенью 2](#textures-dimension)
 
 > 7.2 [Texture Density Should Be Uniform](#textures-dimension)
 
-> 7.3 [Textures Should Be No Bigger than 8192](#textures-max-size)
+> 7.3 [Максимальный размер текстуры должен быть равен 8192](#textures-max-size)
 
 > 7.4 [Correct Texture Groups](#textures-textures-group)
 
 <a name="7.1"></a>
 <a name="textures-dimensions"></a>
-### 7.1 Dimensions Are Powers of 2 
+### 7.1 Размер должен быть степенью 2
 
-All textures, except for UI textures, must have its dimensions in multiples of powers of 2. Textures do not have to be square.
-
-For example, `128x512`, `1024x1024`, `2048x1024`, `1024x2048`, `1x512`.
+Все текстуры, исключая UI текстуры, должны иметь размер равный числу 2, возведенному в какую-либо степень. Текстуры не обязательно должны быть квадратом.
+К примеру, `128x512`, `1024x1024`, `2048x1024`, `1024x2048`, `1x512`.
 
 <a name="7.2"></a>
 <a name="textures-density"></a>
-### 7.2 Texture Density Should Be Uniform
+### 7.2 Плотность текстур должна быть постоянной для проекта.
 
-All textures should be of a size appropriate for their standard use case. Appropriate texture density varies from project to project, but all textures within that project should have a consistent density.
-
-For example, if a project's texture density is 8 pixel per 1 unit, a texture that is meant to be applied to a 100x100 unit cube should be 1024x1024, as that is the closest power of 2 that matches the project's texture density. 
+Все текстуры должны иметь размер, соответствующий их применению. Соответствующая плотность текстур варьируется от проекта к проекту, но все текстуры в рамках этого проекта должны иметь постоянную плотность.
+К примеру, если текстура проекта имеет плотность 8 пикселей на 1 юнит и должна быть на кубе размером 100х100 юнитов, то ее размер должен быть 1024х1024, так как это ближайшая степень 2, которая соответствует плотности текстур проекта. То есть 8*100 == 800. 2^9 == 512, 2^10 == 1024. 800 ближе к 1024, значит нужно брать размер текстуры 1024х1024.
 
 <a name="7.3"></a>
 <a name="textures-max-size"></a>
-### 7.3 Textures Should Be No Bigger than 8192 
+### 7.3 Максимальный размер текстуры должен быть равен 8192
 
 No texture should have a dimension that exceeds 8192 in size, unless you have a very explicit reason to do so. Often, using a texture this big is simply just a waste of resources.
 
