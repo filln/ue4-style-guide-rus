@@ -30,28 +30,27 @@
 
 <a name="4.2"></a>
 <a name="s-lods"></a>
-### 4.2 LODs Should Be Set Up Correctly 
+### 4.2 LODs должны быть установлены корректно
 
-This is a subjective check on a per-project basis, but as a general rule any mesh that can be seen at varying distances should have proper LODs.
+Это субъективное правило относительно разных проектов, но меши, которые можно увидеть в игре на разных расстояниях, должны иметь правильные лоды.
 
 <a name="4.3"></a>
 <a name="s-modular-snapping"></a>
-### 4.3 Modular Socketless Assets Should Snap To The Grid Cleanly 
+### 4.3 Модульные объекты без сокетов должны аккуратно устанавливаться на карту в зависимости от размера сетки.
 
-This is a subjective check on a per-asset basis, however any modular socketless assets should snap together cleanly based on the project's grid settings.
-
-It is up to the project whether to snap based on a power of 2 grid or on a base 10 grid. However if you are authoring modular socketless assets for the marketplace, Epic's requirement is that they snap cleanly when the grid is set to 10 units or bigger.
+Это субъективное правило для разных проектов, но любые ассеты без сокетов должны соединяться вместе правильно, учитывая масштаб сетки.
+Это правило не зависит от того, установлен ли размер сетки на2 или на 10. Однако если делаете ассеты для маркетплейса, то ну жно знать, что требования Епиков тут такие: привязка должна корректно работать про размере сетки 10 и больше.
 
 <a name="4.4"></a>
 <a name="s-collision"></a>
-### 4.4 All Meshes Must Have Collision 
+### 4.4 All Меши должны иметь коллизии
 
-Regardless of whether an asset is going to be used for collision in a level, all meshes should have proper collision defined. This helps the engine with things such as bounds calculations, occlusion, and lighting. Collision should also be well-formed to the asset.
+Независимо от того, будет ли использоваться коллизия, столкновения для мешей, все меши должны иметь правильно установленную коллизию. Это поможет движку с такими вещами как расчет столкновений, occlusion и расчет освещения. Коллизия должна быть хорошей офрмы относительно объекта.
 
 <a name="4.5"></a>
 <a name="s-scaled"></a>
-### 4.5 All Meshes Should Be Scaled Correctly 
+### 4.5 Все меши болжны быть масштабированы корректно
 
-This is a subjective check on a per-project basis, however all assets should be scaled correctly to their project. Level designers or blueprint authors should not have to tweak the scale of meshes to get them to confirm in the editor. Scaling meshes in the engine should be treated as a scale override, not a scale correction.
+Это субъективное правило для разных проектов, масштабирование мешей должно быть корректным. Левел-дизайнеры или блюпринт-разработчики не должны настраивать масштабирование мешей, чтобы использовать их в редакторе. Масштабирование мешей в движке должно рассматриваться как переопределение масштабирования во вьюпорте, а не изменение масштабирования самого меша.
 
 **[⬆ Back to Top](#s)**
