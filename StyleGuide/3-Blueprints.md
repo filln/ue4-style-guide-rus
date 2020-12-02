@@ -60,7 +60,7 @@
 <a name="bp-var-naming-case"></a>
 ##### 3.2.1.2 ДельфиСтиль 
 
-Все не-булевые переменные должны быть написаны в [ДельфиСтиле](/0-ContentsAndDescription.md#terms-cases).
+Все не-булевые переменные должны быть написаны в [ДельфиСтиле](StyleGuide/0-ContentsAndDescription.md#terms-cases).
 
 <a name="3.2.1.2e"></a>
 ###### 3.2.1.2e Примеры:

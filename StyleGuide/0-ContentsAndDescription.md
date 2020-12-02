@@ -5,14 +5,14 @@
 
 <a name="toc"></a>
 ## Содержание
-> 0. [Содержание и описание](/0-ContentsAndDescription.md)
-> 1. [Соглашение о наименованиях](/1-AssetNamingConventions.md)
-> 2. [Структура папок проекта](/2-DirectoryStructure.md)
-> 3. [Блупринты](/3-Blueprints.md)
-> 4. [Static Meshes](4-StaticMeshes.md)
-> 5. [Particle Systems](5-ParticleSystems.md)
-> 6. [Levels / Maps](6-LevelsMaps.md)
-> 7. [Textures](7-Textures.md)
+> 0. [Содержание и описание](StyleGuide/0-ContentsAndDescription.md)
+> 1. [Соглашение о наименованиях](StyleGuide/1-AssetNamingConventions.md)
+> 2. [Структура папок проекта](StyleGuide/2-DirectoryStructure.md)
+> 3. [Блупринты](StyleGuide/3-Blueprints.md)
+> 4. [Static Meshes](StyleGuide/4-StaticMeshes.md)
+> 5. [Particle Systems](StyleGuide/5-ParticleSystems.md)
+> 6. [Levels / Maps](StyleGuide/6-LevelsMaps.md)
+> 7. [Textures](StyleGuide/7-Textures.md)
 
 *Наиболее разумный подход к Unreal Engine 4*
 
@@ -82,6 +82,6 @@ _(От переводчика)_ Многие вещи будут называт�
 
 Copyright (c) 2016 Gamemakin LLC
 
-See [LICENSE](/LICENSE)
+See [LICENSE](StyleGuide/LICENSE)
 
 **[⬆ Back to Top](#ContentsAndDescription)**
