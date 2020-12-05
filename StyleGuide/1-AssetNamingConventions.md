@@ -100,7 +100,7 @@
 | Скелетный меш        | Skeletal Mesh      | SK_          |            |                                     |
 | Текстура             | Texture            | T_           | _?         | См. [Текстуры](#anc-textures)       |
 | Система частиц       | Particle System    | PS_          |            |                                     |
-| Виджет-блупринт      | Widget Blueprint   | WBP          |            |                                     |
+| Виджет-блупринт      | Widget Blueprint   | WBP_         |            |                                     |
 
 <a name="anc-ai"></a>
 <a name="1.2.2"></a>
