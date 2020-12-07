@@ -472,7 +472,7 @@
 * Субграфы (Subgraphs). Они избыточны.
 * Delay. Она не переносима на С++ и вызывает проблемы при нативизации. Используйте SetTimerByFunctionName или SetTimerByEvent.
 * Select. Чтобы перенести логику на этой ноде на С++, иногда нужно во многом изменить ее.  
-* EventTick. Используйте SetTimerByFunctionName или SetTimerByEvent..
+* EventTick. Используйте SetTimerByFunctionName или SetTimerByEvent.
 
 <a name="3.3.9"></a>
 #### 3.3.9 Если вы знаете С++, то делайте блюпринты так, чтобы логика без изменения и легко переносилась на С++.
