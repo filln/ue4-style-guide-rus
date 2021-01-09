@@ -16,10 +16,10 @@
         |   |-- NPC1
         |   |-- NPC2
         |-- Animations
-        |   |-- Character
+        |   |-- PlayerCharacter
         |   |-- NPC
         |-- Blueprints
-        |   |-- Character
+        |   |-- PlayerCharacter
         |   |-- Core
         |   |   |-- GameModes
         |   |   |-- HUDs
@@ -32,16 +32,35 @@
         |-- Data
         |   |-- Inventory
         |   |-- Weapons
-        |   |-- Character
+        |   |-- PlayerCharacter
         |-- Landscape
         |-- Maps
         |   |-- Layers
         |-- Materials
-        |   |-- Inventory
+        |   |--Enemy
+        |   |--Environment
+        |   |   |--Architecture
+        |   |   |--Foliage
+        |   |   |--Rocks
+        |   |   |--Water        
+        |   |--Landscape
+        |   |   |--Level1
+        |   |   |--Level2        
+        |   |--NPC
+        |   |--Particles
+        |   |--PlayerCharacter
+        |   |--UI
+        |   |   |-- Inventory
         |   |-- Weapons
         |-- Meshes
-        |   |-- Character
-        |   |-- NPC
+        |   |--Enemy
+        |   |--Environment
+        |   |   |--Architecture
+        |   |   |--Foliage
+        |   |   |--Rocks
+        |   |   |--Water        
+        |   |--NPC
+        |   |--PlayerCharacter
         |   |-- Weapons
         |-- Particles
         |-- Physics
@@ -51,7 +70,17 @@
         |   |-- Weapons
         |   |   |-- SoundClasses
         |-- Textures
-        |   |-- Inventory
+        |   |--Enemy
+        |   |--Environment
+        |   |   |--Architecture
+        |   |   |--Foliage
+        |   |   |--Rocks
+        |   |   |--Water        
+        |   |--NPC
+        |   |--Particles
+        |   |--PlayerCharacter
+        |   |--UI
+        |   |   |-- Inventory
         |   |-- Weapons
         |-- UI
         |   |-- Inventory
