@@ -27,40 +27,42 @@
         |   |-- FunctionLibraries
         |   |-- Interfaces
         |   |-- Inventory
+        |   |-- Items        
         |   |-- NPC
         |   |-- Weapons
         |-- Data
         |   |-- Inventory
+        |   |-- Items         
         |   |-- Weapons
         |   |-- PlayerCharacter
         |-- Landscape
         |-- Maps
         |   |-- Layers
         |-- Materials
-        |   |--Enemy
-        |   |--Environment
-        |   |   |--Architecture
-        |   |   |--Foliage
-        |   |   |--Rocks
-        |   |   |--Water        
-        |   |--Landscape
-        |   |   |--Level1
-        |   |   |--Level2        
-        |   |--NPC
-        |   |--Particles
-        |   |--PlayerCharacter
-        |   |--UI
+        |   |-- Environment
+        |   |   |-- Architecture
+        |   |   |-- Foliage
+        |   |   |-- Rocks
+        |   |   |-- Water     
+        |   |-- Items         
+        |   |-- Landscape
+        |   |   |-- Level1
+        |   |   |-- Level2        
+        |   |-- NPC
+        |   |-- Particles
+        |   |-- PlayerCharacter
+        |   |-- UI
         |   |   |-- Inventory
         |   |-- Weapons
         |-- Meshes
-        |   |--Enemy
-        |   |--Environment
-        |   |   |--Architecture
-        |   |   |--Foliage
-        |   |   |--Rocks
-        |   |   |--Water        
-        |   |--NPC
-        |   |--PlayerCharacter
+        |   |-- Environment
+        |   |   |-- Architecture
+        |   |   |-- Foliage
+        |   |   |-- Rocks
+        |   |   |-- Water        
+        |   |-- Items         
+        |   |-- NPC
+        |   |-- PlayerCharacter
         |   |-- Weapons
         |-- Particles
         |-- Physics
@@ -70,16 +72,16 @@
         |   |-- Weapons
         |   |   |-- SoundClasses
         |-- Textures
-        |   |--Enemy
-        |   |--Environment
-        |   |   |--Architecture
-        |   |   |--Foliage
-        |   |   |--Rocks
-        |   |   |--Water        
-        |   |--NPC
-        |   |--Particles
-        |   |--PlayerCharacter
-        |   |--UI
+        |   |-- Environment
+        |   |   |-- Architecture
+        |   |   |-- Foliage
+        |   |   |-- Rocks
+        |   |   |-- Water        
+        |   |-- Items         
+        |   |-- NPC
+        |   |-- Particles
+        |   |-- PlayerCharacter
+        |   |-- UI
         |   |   |-- Inventory
         |   |-- Weapons
         |-- UI
@@ -110,6 +112,7 @@
 
 Как видите, в принципе разделения по каталогам первым идет тип данных `(Blueprint, UI...)`, затем тип ассета `(Inventory, Weapons...)`. Затем, внутри каталога ассета `(Inventory, Weapons...)` можно создать дополнительные каталоги как для типов данных `(Data--Inventory--StringTables, Data--Sky--Structures)`, так и для разделов по выполняемым функциям, принадлежностям к объектам `(Texture--Weapons--AK47, Blueprints--NPC--NPC1)`. Еще, как пример, `Data--Weapons--AK47--Structures`.
 Если файлов в каталоге не много (меньше 5), то лучше дополнительных каталогов не создавать. Как пример, `Data--Weapons--SAK47.uasset`, `Data--Weapons--SDesertEagle.uasset`, `Data--Weapons--DT_AK47.uasset`.
+Подкаталог `Items` в `Materials`, `Textures` и пр. используйте также для объектов окружения, которые содержат игровую логику, но не являются оружием. Например, аптечка.  
 Используйте также фильтр контент-браузера и фильтр строки поиска.
 
 Предпосылки формирования именно такой структуры проекта описаны ниже.
